@@ -24,7 +24,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+      background: linear-gradient(135deg, #ff7e5f, #4ECDC4);
       color: var(--dark-text);
       line-height: 1.6;
       min-height: 100vh;
@@ -452,111 +452,4 @@
       const isOpen = chatbotWindow.style.display === 'flex';
       
       chatbotWindow.style.display = isOpen ? 'none' : 'flex';
-      document.body.classList.toggle('chatbot-open', !isOpen);
-      
-      if (!isOpen) {
-        displayCategories();
-      }
-    }
-
-    function displayCategories() {
-      const chatbotCategories = document.getElementById('chatbotCategories');
-      const chatbotMessages = document.getElementById('chatbotMessages');
-      
-      chatbotCategories.innerHTML = '';
-      chatbotMessages.innerHTML = `
-        <div class="bot-message initial-message">
-          Bonjour ! Je suis votre assistant. Choisissez une catégorie de questions.
-        </div>
-      `;
-
-      chatbotQuestions.forEach(category => {
-        const categoryDiv = document.createElement('div');
-        categoryDiv.className = 'category-btn';
-        categoryDiv.textContent = category.category;
-        categoryDiv.onclick = () => displayQuestions(category);
-        chatbotCategories.appendChild(categoryDiv);
-      });
-
-      // Add hover and active state styles
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          this.style.backgroundColor = 'rgba(78, 205, 196, 0.2)';
-          this.style.transform = 'translateX(5px)';
-        });
-        btn.addEventListener('mouseleave', function() {
-          this.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-          this.style.transform = 'translateX(0)';
-        });
-      });
-    }
-
-    function displayQuestions(category) {
-      const chatbotCategories = document.getElementById('chatbotCategories');
-      const chatbotMessages = document.getElementById('chatbotMessages');
-      
-      chatbotCategories.innerHTML = '';
-      chatbotMessages.innerHTML += `
-        <div class="bot-message category-select">
-          🔍 Catégorie : ${category.category}
-        </div>
-      `;
-
-      category.questions.forEach(question => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question-btn';
-        questionDiv.textContent = question;
-        questionDiv.onclick = () => showAnswer(question);
-        chatbotCategories.appendChild(questionDiv);
-      });
-
-      const returnDiv = document.createElement('div');
-      returnDiv.className = 'return-btn';
-      returnDiv.textContent = '← Retour aux catégories';
-      returnDiv.onclick = displayCategories;
-      chatbotCategories.appendChild(returnDiv);
-
-      // Add hover and active state styles for questions
-      document.querySelectorAll('.question-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-          this.style.backgroundColor = 'rgba(255, 107, 107, 0.2)';
-          this.style.transform = 'translateX(5px)';
-        });
-        btn.addEventListener('mouseleave', function() {
-          this.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-          this.style.transform = 'translateX(0)';
-        });
-      });
-    }
-
-    function showAnswer(question) {
-      const chatbotMessages = document.getElementById('chatbotMessages');
-      const chatbotCategories = document.getElementById('chatbotCategories');
-      
-      const messageContainer = document.createElement('div');
-      messageContainer.innerHTML = `
-        <div class="bot-message question-highlight">
-          📝 Question : ${question}
-        </div>
-        <div class="bot-response answer-display">
-          🤖 Réponse : ${chatbotResponses[question]}
-        </div>
-      `;
-      
-      chatbotMessages.appendChild(messageContainer);
-      
-      chatbotCategories.innerHTML = `
-        <button onclick="displayCategories()" class="return-btn">Retour aux catégories</button>
-      `;
-      
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    // Initialize chatbot
-    document.addEventListener('DOMContentLoaded', () => {
-      const chatbotIcon = document.querySelector('.chatbot-icon');
-      chatbotIcon.addEventListener('click', toggleChatbot);
-    });
-  </script>
-</body>
-</html>
+      document
